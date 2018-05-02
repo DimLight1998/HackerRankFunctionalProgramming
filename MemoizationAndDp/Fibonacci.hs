@@ -1,12 +1,15 @@
-import           Data.Vector
-import           Prelude     hiding (map, mapM_, maximum)
+import           Control.Monad
+import           Data.Vector   hiding (map, mapM_, maximum, replicateM)
+
+modulo :: Int
+modulo = 100000007
 
 buildVec :: Int -> Vector Int
 buildVec n = v where
     v = generate (n + 1) f
     f 0 = 0
     f 1 = 1
-    f x = (v ! (x - 1)) + 3 * x - 2
+    f x = (v ! (x - 1) + v ! (x - 2)) `mod` modulo
 
 main :: IO ()
 main = do
